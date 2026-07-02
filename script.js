@@ -39,15 +39,19 @@ async function fetchNews() {
             // Jika kolom Judul kosong, skip pembuatan kartu berita ini
             if (judul.trim() === "") continue;
 
-            // Template kartu berita modern dengan validasi .trim() untuk membuang spasi liar
+            // Template kartu berita versi smooth, terpusat di tengah
             const newsCard = `
-                <div class="news-card" style="background: var(--secondary-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin-bottom: 24px; transition: transform 0.3s ease;">
-                    ${linkGambar.trim() !== "" ? `<img src="${linkGambar.trim()}" alt="${judul.trim()}" style="width: 100%; height: 200px; object-fit: cover;">` : ''}
-                    <div style="padding: 24px;">
-                        <span style="font-size: 12px; color: var(--accent-color); font-weight: 600; text-transform: uppercase;">${kategori.trim() || 'Trending'}</span>
-                        <h3 style="font-size: 20px; margin: 8px 0 12px; font-weight: 600;">${judul.trim()}</h3>
-                        <p style="color: #a1a1aa; font-size: 14px; margin-bottom: 16px;">${ringkasan.trim()}</p>
-                        <span style="font-size: 12px; color: #71717a;">${tanggal.trim() || ''}</span>
+                <div class="news-card">
+                    ${linkGambar.trim() !== "" ? `
+                    <div class="news-image">
+                        <img src="${linkGambar.trim()}" alt="${judul.trim()}">
+                    </div>
+                    ` : ''}
+                    <div class="news-content">
+                        <span class="news-category">${kategori.trim() || 'Trending'}</span>
+                        <h3 class="news-title">${judul.trim()}</h3>
+                        <p class="news-description">${ringkasan.trim()}</p>
+                        <span class="news-date">${tanggal.trim() || ''}</span>
                     </div>
                 </div>
             `;
@@ -61,31 +65,60 @@ async function fetchNews() {
     }
 }
 
-// Jalankan fungsi setelah website sepenuhnya diload oleh browser
+// Jalankan semua fungsi setelah website sepenuhnya diload oleh browser
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Tarik Data Berita
     fetchNews();
     
-    // Logika tombol interaktif lainnya yang sebelumnya lo pakai
+    // 2. Logika Form Newsletter
     const newsletterForm = document.getElementById('newsletterForm');
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = newsletterForm.querySelector('button');
             const originalText = btn.innerText;
+            
+            // Efek visual sukses subscribe
             btn.innerText = "Subscribed!";
             btn.style.backgroundColor = "#fff";
+            btn.style.color = "#000"; 
+            
             setTimeout(() => {
                 newsletterForm.reset();
                 btn.innerText = originalText;
                 btn.style.backgroundColor = "var(--accent-color)";
-            }, 1000);
+                btn.style.color = "#000";
+            }, 1500);
         });
     }
 
+    // 3. Fitur Scroll to Top (Sudah dipisah kamarnya biar rapi)
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // 4. Fitur Interaksi Polling/Voting
     const polls = document.querySelectorAll('.poll-item');
     polls.forEach(poll => {
         poll.addEventListener('click', () => {
+            // Reset semua garis tepi
             polls.forEach(p => p.style.borderColor = 'var(--border-color)');
+            // Nyalakan warna neon pada yang dipilih
             poll.style.borderColor = 'var(--accent-color)';
         });
         poll.style.cursor = 'pointer';

@@ -8,6 +8,12 @@
     --font-family: 'Inter', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+    padding-top: 80px; /* Untuk menghindari konten tertutup oleh navbar */
+
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -271,4 +277,193 @@ footer {
     .hero-logo { font-size: 56px; }
     .hero-actions { flex-direction: column; }
     .newsletter-form { flex-direction: column; }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color); /* Menggunakan hijau neon tema lo */
+    color: #000; /* Warna panah hitam biar kontras */
+    border: none;
+    border-radius: 50%; /* Bikin bulat sempurna */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(209, 255, 39, 0.3); /* Efek glow neon */
+    opacity: 0; /* Sembunyi dari awal */
+    visibility: hidden;
+    transform: translateY(20px); /* Agak turun ke bawah saat sembunyi */
+    transition: all 0.3s ease; /* Animasi mulus saat muncul/hilang */
+    z-index: 999; /* Biar posisinya selalu di atas elemen lain */
+}
+
+/* Class ini akan ditambahkan lewat JS saat user mulai scroll */
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: translateY(-5px); /* Efek ngambang saat di-hover */
+    background-color: #fff; /* Berubah putih biar interaktif */
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* --- STYLING NEWS CARD (VERSI SMOOTH & CENTERED) --- */
+.posts-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Bikin semua kartu otomatis di tengah */
+    gap: 30px;
+    width: 100%;
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column; /* Formasi vertikal yang seimbang */
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px; /* Sudut ujung blok luar dibikin tumpul smooth */
+    overflow: hidden;
+    width: 100%;
+    max-width: 680px; /* Membatasi lebar kartu biar proporsional di tengah */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
+    box-shadow: 0 15px 35px rgba(209, 255, 39, 0.1);
+}
+
+.news-image {
+    width: 100%;
+    height: 340px; /* Tinggi gambar yang ideal dan pas */
+    overflow: hidden;
+    position: relative;
+    padding: 16px 16px 0 16px; /* Kasih padding dalam biar gambar ga nempel ujung luar */
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px; /* INI DIA: Ujung gambar dikasih rounded corner smooth */
+    display: block;
+}
+
+.news-content {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-category {
+    font-size: 12px;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.news-title {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--text-color);
+    margin: 4px 0;
+}
+
+.news-description {
+    color: #a1a1aa;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.news-date {
+    font-size: 13px;
+    color: #71717a;
+    font-weight: 500;
+}
+
+/* Responsif untuk Layar HP */
+@media (max-width: 768px) {
+    .news-card {
+        max-width: 100%;
+    }
+    .news-image {
+        height: 220px;
+        padding: 12px 12px 0 12px;
+    }
+    .news-image img {
+        border-radius: 8px;
+    }
+    .news-content {
+        padding: 20px;
+    }
+    .news-title {
+        font-size: 20px;
+    }
+}
+
+.news-card:hover {
+    transform: translateY(-5px); /* Efek ngambang */
+    border-color: var(--accent-color); /* Border nyala hijau neon pas disentuh */
+}
+
+.news-image {
+    flex: 0 0 300px; /* Lebar gambar fix 300px di laptop */
+    max-width: 300px;
+    background: #111; /* Warna dasar kalau gambar telat loading */
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Biar gambar gak gepeng */
+    display: block;
+}
+
+.news-content {
+    padding: 24px;
+    flex: 1; /* Teks ngambil sisa ruang yang ada */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Biar Kategori warnanya nyala */
+.news-category {
+    font-size: 12px;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* Responsif: Kalau di HP, gambarnya otomatis pindah ke atas! */
+@media (max-width: 768px) {
+    .news-card {
+        flex-direction: column; /* Ubah formasi jadi atas-bawah */
+    }
+    .news-image {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 200px; /* Tinggi gambar di HP */
+    }
 }
