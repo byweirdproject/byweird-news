@@ -328,75 +328,116 @@ footer {
     width: 100%;
 }
 
-.news-card {
+/* --- LEBARIN KONTAINER BERITA --- */
+#the-loop .container {
+    max-width: 1200px !important; /* Lo bisa ganti angkanya ke 1100px atau 1200px kalau masih kurang lebar */
+    max-height: 0% !important; /* Biar ga ada batasan tinggi */
+    margin: 0 auto; /* Biar posisinya tetap rapi di tengah layar */
+}
+
+/* --- STYLING NEWS CARD (VERSI KIRI-KANAN & TEKS RATA KIRI-KANAN) --- */
+.posts-grid {
     display: flex;
-    flex-direction: column; /* Formasi vertikal yang seimbang */
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.news-card {
+    display: flex !important;
+    flex-direction: row !important; /* MANTRA UTAMA: Paksa gambar di kiri, teks di kanan */
+    align-items: stretch; /* Memaksa tinggi gambar ngikutin tinggi teks */
     background: var(--secondary-bg);
     border: 1px solid var(--border-color);
-    border-radius: 16px; /* Sudut ujung blok luar dibikin tumpul smooth */
+    border-radius: 16px;
     overflow: hidden;
     width: 100%;
-    max-width: 680px; /* Membatasi lebar kartu biar proporsional di tengah */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    min-height: 220px;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-card:hover {
     transform: translateY(-4px);
     border-color: var(--accent-color);
-    box-shadow: 0 15px 35px rgba(209, 255, 39, 0.1);
+    box-shadow: 0 10px 30px rgba(209, 255, 39, 0.08);
 }
 
 .news-image {
-    width: 100%;
-    height: 340px; /* Tinggi gambar yang ideal dan pas */
-    overflow: hidden;
+    width: 320px; /* Lebar gambar dikunci di 320px, ga akan melar/menciut */
+    flex-shrink: 0; /* Anti gepeng club */
     position: relative;
-    padding: 16px 16px 0 16px; /* Kasih padding dalam biar gambar ga nempel ujung luar */
+    background: #111;
 }
 
 .news-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 12px; /* INI DIA: Ujung gambar dikasih rounded corner smooth */
+    object-fit: cover; /* Biar gambar terpotong rapi secara proporsional */
     display: block;
 }
 
 .news-content {
-    padding: 28px;
+    padding: 24px 32px;
+    flex: 1; /* Sisa ruang di kanan diisi full sama teks */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: center;
 }
 
 .news-category {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--accent-color);
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    margin-bottom: 12px;
 }
 
 .news-title {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 800;
     line-height: 1.3;
     color: var(--text-color);
-    margin: 4px 0;
+    margin: 0 0 12px 0;
 }
 
 .news-description {
     color: #a1a1aa;
     font-size: 15px;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin: 0 0 16px 0;
+    text-align: justify; /* INI DIA: Bikin teks ringkasannya rata kiri dan kanan */
 }
 
 .news-date {
     font-size: 13px;
     color: #71717a;
     font-weight: 500;
+    margin-top: auto; /* Dorong tanggal ke paling bawah */
+}
+
+/* Responsif HP: Biar kalau dibuka di HP, layarnya ga sempit dan otomatis pindah ke atas-bawah */
+@media (max-width: 768px) {
+    .news-card {
+        flex-direction: column !important;
+    }
+    .news-image {
+        width: 100%;
+        height: 200px;
+        min-height: 200px;
+    }
+    .news-image img {
+        position: relative;
+    }
+    .news-content {
+        padding: 20px;
+    }
+    .news-description {
+        text-align: left; /* Khusus di layar HP, rata kiri lebih nyaman dibaca */
+    }
 }
 
 /* Responsif untuk Layar HP */
@@ -528,4 +569,94 @@ footer {
     .article-body {
         font-size: 16px;
     }
+}
+/* --- FIXED LOGO STYLING --- */
+.nav-logo {
+    height: 15px; /* Tinggi logo di navbar, atur aja sesuai selera */
+    width: auto;  /* Biar proporsinya otomatis pas, ga gepeng */
+    display: block;
+}
+.footer-logo-img {
+    height: 50px; /* Tinggi logo di footer */
+    width: auto;
+    margin-bottom: 16px;
+    display: block;
+}
+/* --- STYLING SOSIAL MEDIA FOOTER (FIXED) --- */
+.social-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.social-links a {
+    display: inline-flex;
+    transition: transform 0.3s ease;
+}
+
+/* Ganti dari 'svg' ke 'img' biar nge-lock tag <img> lo, Bre! */
+.social-links img {
+    width: 24px;  /* Ukuran ikon pas, ga kekecilan/kegedean */
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efek glow hijau neon pas kursor lo nempel di ikon */
+.social-links a:hover img {
+    transform: translateY(-4px); /* Ikon naik dikit */
+    filter: drop-shadow(0 0 6px var(--accent-color)); /* Glow neon hijau! */
+}
+/* ==========================================================================
+   FIX UKURAN LOGO UTAMA BYWEIRD (ATAS & BAWAH)
+   ========================================================================== */
+
+/* 1. Logo Utama di Navbar (Atas) */
+.navbar .logo-img {
+    height: 32px;      /* Tinggi pas biar sejajar rapi sama menu navbar */
+    width: auto;       /* Biar proporsinya otomatis pas, gak gepeng */
+    display: block;
+}
+
+/* 2. Logo Utama di Footer (Bawah) */
+.footer-logo .logo-img {
+    height: 48px;      /* Ukuran proporsional buat di footer */
+    width: auto;       /* Biar gak gepeng */
+    display: block;
+    margin: 0 auto;    /* Biar posisinya pas di tengah-tengah footer */
+}
+/* ==========================================================================
+   RAMPINGKAN HEADER/NAVBAR ATAS BIAR SLEEK & PAS
+   ========================================================================== */
+
+/* 1. Sesuaikan padding-top pada HTML agar jarak konten pas */
+html {
+    padding-top: 60px !important; /* Diturunkan dari 80px biar gak ada celah kosong */
+}
+
+/* 2. Tipiskan padding navbar atas-bawah */
+.navbar {
+    padding: 12px 5% !important; /* Diturunkan dari 20px biar navbar gak terlalu tebal */
+}
+
+/* 3. Rampingkan ukuran logo utama di navbar */
+.navbar .logo-img {
+    height: 24px !important; /* Diturunkan dari 32px biar kelihatan super sleek */
+    width: auto;
+    display: block;
+}
+/* ==========================================================================
+   ATUR UKURAN LOGO TENGAH (HERO/HOMEPAGE) BIAR PAS & RESPONSIF
+   ========================================================================== */
+
+/* Mengatur ukuran gambar logo tengah agar tidak kebablasan */
+img.hero-logo, 
+.hero-logo img,
+.hero-content img {
+    max-width: 280px; /* Batasi lebar maksimal logo (bisa lo ganti sesuai selera, misal 250px - 350px) */
+    width: 100%;      /* Supaya otomatis mengecil mengikuti layar HP */
+    height: auto;     /* Menjaga rasio gambar biar gak gepeng/distorsi */
+    margin: 0 auto 20px auto; /* Memposisikan di tengah dan memberi jarak ke tagline di bawahnya */
+    display: block;
 }
