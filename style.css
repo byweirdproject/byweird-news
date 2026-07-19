@@ -570,93 +570,32 @@ footer {
         font-size: 16px;
     }
 }
-/* --- FIXED LOGO STYLING --- */
-.nav-logo {
-    height: 15px; /* Tinggi logo di navbar, atur aja sesuai selera */
-    width: auto;  /* Biar proporsinya otomatis pas, ga gepeng */
-    display: block;
-}
-.footer-logo-img {
-    height: 50px; /* Tinggi logo di footer */
-    width: auto;
-    margin-bottom: 16px;
-    display: block;
-}
-/* --- STYLING SOSIAL MEDIA FOOTER (FIXED) --- */
-.social-links {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin: 24px 0;
-}
-
-.social-links a {
-    display: inline-flex;
-    transition: transform 0.3s ease;
-}
-
-/* Ganti dari 'svg' ke 'img' biar nge-lock tag <img> lo, Bre! */
-.social-links img {
-    width: 24px;  /* Ukuran ikon pas, ga kekecilan/kegedean */
-    height: 24px;
-    object-fit: contain;
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-/* Efek glow hijau neon pas kursor lo nempel di ikon */
-.social-links a:hover img {
-    transform: translateY(-4px); /* Ikon naik dikit */
-    filter: drop-shadow(0 0 6px var(--accent-color)); /* Glow neon hijau! */
-}
 /* ==========================================================================
-   FIX UKURAN LOGO UTAMA BYWEIRD (ATAS & BAWAH)
+   FIX UKURAN SEMUA LOGO (ATAS, TENGAH, BAWAH)
    ========================================================================== */
 
 /* 1. Logo Utama di Navbar (Atas) */
+.navbar .logo a img,
 .navbar .logo-img {
-    height: 32px;      /* Tinggi pas biar sejajar rapi sama menu navbar */
-    width: auto;       /* Biar proporsinya otomatis pas, gak gepeng */
+    height: 28px !important; 
+    width: auto !important;
     display: block;
 }
 
-/* 2. Logo Utama di Footer (Bawah) */
+/* 2. Logo Hero di Homepage (Tengah) */
+.hero-content img,
+img.hero-logo {
+    max-width: 280px !important; 
+    height: auto !important;
+    margin: 0 auto 20px auto !important;
+    display: block;
+}
+
+/* 3. Logo di Footer (Bawah) */
+.footer-logo img,
 .footer-logo .logo-img {
-    height: 48px;      /* Ukuran proporsional buat di footer */
-    width: auto;       /* Biar gak gepeng */
-    display: block;
-    margin: 0 auto;    /* Biar posisinya pas di tengah-tengah footer */
-}
-/* ==========================================================================
-   RAMPINGKAN HEADER/NAVBAR ATAS BIAR SLEEK & PAS
-   ========================================================================== */
-
-/* 1. Sesuaikan padding-top pada HTML agar jarak konten pas */
-html {
-    padding-top: 60px !important; /* Diturunkan dari 80px biar gak ada celah kosong */
-}
-
-/* 2. Tipiskan padding navbar atas-bawah */
-.navbar {
-    padding: 12px 5% !important; /* Diturunkan dari 20px biar navbar gak terlalu tebal */
-}
-
-/* 3. Rampingkan ukuran logo utama di navbar */
-.navbar .logo-img {
-    height: 24px !important; /* Diturunkan dari 32px biar kelihatan super sleek */
-    width: auto;
-    display: block;
-}
-/* ==========================================================================
-   ATUR UKURAN LOGO TENGAH (HERO/HOMEPAGE) BIAR PAS & RESPONSIF
-   ========================================================================== */
-
-/* Mengatur ukuran gambar logo tengah agar tidak kebablasan */
-img.hero-logo, 
-.hero-logo img,
-.hero-content img {
-    max-width: 280px; /* Batasi lebar maksimal logo (bisa lo ganti sesuai selera, misal 250px - 350px) */
-    width: 100%;      /* Supaya otomatis mengecil mengikuti layar HP */
-    height: auto;     /* Menjaga rasio gambar biar gak gepeng/distorsi */
-    margin: 0 auto 20px auto; /* Memposisikan di tengah dan memberi jarak ke tagline di bawahnya */
+    height: 48px !important;
+    width: auto !important;
+    margin: 0 auto 15px auto !important;
     display: block;
 }
