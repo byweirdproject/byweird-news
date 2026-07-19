@@ -599,3 +599,77 @@ img.hero-logo {
     margin: 0 auto 15px auto !important;
     display: block;
 }
+/* ==========================================================================
+   FIX UKURAN IKON SOSIAL MEDIA FOOTER
+   ========================================================================== */
+.social-links {
+    display: flex;
+    gap: 24px; /* Jarak antar logo sosmed */
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0;
+}
+
+.social-links img {
+    width: 28px !important;  /* Kunci ukuran lebar ikon */
+    height: 28px !important; /* Kunci ukuran tinggi ikon */
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efek nyala neon hijau pas disentuh kursor */
+.social-links a:hover img {
+    transform: translateY(-4px); 
+    filter: drop-shadow(0 0 8px var(--accent-color));
+}
+/* ==========================================================================
+   STYLING FOOTER PHOTOCARD & TOMBOL VOTE (WEIRD / NOT WEIRD)
+   ========================================================================== */
+
+/* ==========================================================================
+   FIX POSISI TANGGAL DI KIRI & TOMBOL DI KANAN
+   ========================================================================== */
+.news-footer {
+    display: flex !important;
+    justify-content: space-between !important; /* Mantra ini yang misahin mereka ke kiri & kanan */
+    align-items: center !important;
+    width: 100% !important; /* Paksa ambil lebar full biar space-between-nya kerja */
+    margin-top: auto !important;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Garis pemisah tipis, sesuaikan kalau gak mau pakai */
+}
+
+/* Biar tanggalnya rapi */
+.news-date {
+    margin: 0 !important;
+    font-size: 13px;
+    color: #71717a;
+}
+/* ==========================================================================
+   STYLE TOMBOL VOTE (BOXED & HOVER EFFECT)
+   ========================================================================== */
+.btn-vote-weird {
+    background-color: #ffffff; /* Background putih biar kelihatan bloknya */
+    color: #000000;            /* Teks hitam */
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;        /* Sudut membulat dikit */
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;           /* Biar gak berubah-ubah lebarnya */
+}
+
+/* Mengatur teks ganti */
+.btn-vote-weird .hover-text { display: none; }
+
+/* Pas di-hover: ganti teks dan kasih efek */
+.btn-vote-weird:hover {
+    background-color: var(--accent-color); /* Berubah jadi hijau neon */
+    transform: scale(1.05);
+}
+
+.btn-vote-weird:hover .default-text { display: none; }
+.btn-vote-weird:hover .hover-text { display: inline; }

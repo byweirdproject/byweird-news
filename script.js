@@ -31,27 +31,36 @@ async function fetchNews() {
 
             // Kartu Berita diubah jadi <a href="..."> biar bisa diklik
             const newsCard = `
-                <a href="artikel.html?id=${i}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
-                    <div class="news-card">
-                        ${linkGambar.trim() !== "" ? `
-                        <div class="news-image">
-                            <img src="${linkGambar.trim()}" alt="${judul.trim()}">
-                        </div>
-                        ` : ''}
-                        <div class="news-content">
-                            <span class="news-category">${kategori.trim() || 'Trending'}</span>
-                            <h3 class="news-title">${judul.trim()}</h3>
-                            <p class="news-description">${ringkasan.trim()}</p>
-                            <span class="news-date">${tanggal.trim() || ''}</span>
-                        </div>
-                    </div>
-                </a>
-            `;
+<a href="artikel.html?id=${i}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
+    <div class="news-card">
+        
+        <!-- GAMBAR SELALU ADA -->
+        <div class="news-image">
+            <img src="${linkGambar.trim()}" alt="${judul.trim()}">
+        </div>
+        
+        <!-- KONTEN TEKS -->
+        <div class="news-content">
+            <span class="news-category">${kategori.trim() || 'Trending'}</span>
+            <h3 class="news-title">${judul.trim()}</h3>
+            <p class="news-description">${ringkasan.trim()}</p>
+            
+            <div class="news-footer">
+                <span class="news-date">${tanggal.trim() || ''}</span>
+                <button class="btn-vote-weird" onclick="event.preventDefault(); alert('Voting aneh/enggak berhasil direkam!')">
+    <span class="default-text">Aneh Gak? 🤔</span>
+    <span class="hover-text">Ini Aneh!</span>
+</button>
+            </div>
+        </div>
+    </div>
+</a>
+`;
             container.innerHTML += newsCard;
         }
     } catch (error) {
         console.error(error);
-        container.innerHTML = `<div class="empty-state"><p style="color: #ef4444;">Gagal memuat berita.</p></div>`;
+        container.innerHTML = `<div class="empty-state"><p style="color: #ef4444;">Bentar, ini ada yang salah.</p></div>`;
     }
 }
 
