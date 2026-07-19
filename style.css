@@ -673,3 +673,39 @@ img.hero-logo {
 
 .btn-vote-weird:hover .default-text { display: none; }
 .btn-vote-weird:hover .hover-text { display: inline; }
+/* ==========================================================================
+   HOVER EFFECT: IMAGE SOURCE OVERLAY
+   ========================================================================== */
+
+/* Pastikan pembungkus gambar punya posisi relatif */
+.news-image {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Kotak overlay sumber gambar */
+.image-source-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    
+    /* Gradient Hitam Tipis */
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    
+    /* Animasi muncul */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    /* Styling Teks */
+    color: white;
+    font-size: 10px;        /* Sesuai permintaan: kecil aja */
+    text-align: right;     /* Posisikan di pojok kanan bawah overlay */
+    pointer-events: none;  /* Biar gak ganggu klik pas di-hover */
+}
+
+/* Pas news-image di-hover, munculin overlay-nya */
+.news-image:hover .image-source-overlay {
+    opacity: 1;
+}

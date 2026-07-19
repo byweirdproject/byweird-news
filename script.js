@@ -11,6 +11,7 @@ async function fetchNews() {
         const data = await response.text();
         const rows = data.split(/\r?\n/).map(row => row.split('\t'));
         
+        
         container.innerHTML = '';
         
         if (rows.length <= 1 || (rows[1] && rows[1][0] === "")) {
@@ -24,9 +25,9 @@ async function fetchNews() {
             const judul = row[0] || '';
             const tanggal = row[1] || '';
             const kategori = row[2] || '';
-            const ringkasan = row[3] || '';
+            const ringkasan = row[3] || ''; 
             const linkGambar = row[4] || '';
-            
+            const credit = row[5] || '';
             if (judul.trim() === "") continue;
 
             // Kartu Berita diubah jadi <a href="..."> biar bisa diklik
@@ -34,12 +35,14 @@ async function fetchNews() {
 <a href="artikel.html?id=${i}" style="text-decoration: none; color: inherit; display: block; width: 100%;">
     <div class="news-card">
         
-        <!-- GAMBAR SELALU ADA -->
         <div class="news-image">
             <img src="${linkGambar.trim()}" alt="${judul.trim()}">
+            <!-- Pake variabel 'credit' yang udah kita definisiin di atas -->
+            <div class="image-source-overlay">
+                <span>Source: ${credit || kategori || 'byWeird'}</span>
+            </div>
         </div>
         
-        <!-- KONTEN TEKS -->
         <div class="news-content">
             <span class="news-category">${kategori.trim() || 'Trending'}</span>
             <h3 class="news-title">${judul.trim()}</h3>
@@ -48,9 +51,9 @@ async function fetchNews() {
             <div class="news-footer">
                 <span class="news-date">${tanggal.trim() || ''}</span>
                 <button class="btn-vote-weird" onclick="event.preventDefault(); alert('Voting aneh/enggak berhasil direkam!')">
-    <span class="default-text">Aneh Gak? 🤔</span>
-    <span class="hover-text">Ini Aneh!</span>
-</button>
+                    <span class="default-text">Aneh Gak? 🤔</span>
+                    <span class="hover-text">Ini Aneh!</span>
+                </button>
             </div>
         </div>
     </div>
